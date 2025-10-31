@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Milton Javier Acosta</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .photo-container {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            border: 5px solid white;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: #667eea;
+        }
+        
+        .name {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .title {
+            font-size: 1.3em;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 35px;
+            animation: fadeIn 0.6s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #764ba2;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .skill-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid #667eea;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .skill-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        .skill-desc {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        
+        .experience-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #764ba2;
+            transition: transform 0.3s;
+        }
+        
+        .experience-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .exp-title {
+            font-size: 1.2em;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .exp-company {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .exp-period {
+            color: #999;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        
+        .exp-desc {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .buttons-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+        
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            transform: scale(1.05);
+        }
+        
+        .btn-download {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-download:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        @media (max-width: 768px) {
+            .name {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .buttons-container {
+                display: none;
+            }
+            
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="cv-content">
+        <div class="header">
+            <div class="photo-container">
+                <div class="photo-placeholder">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+            <h1 class="name">Milton Javier Acosta</h1>
+            <p class="title">Profesional Comercial</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Posadas, Misiones</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>contacto@email.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+54 9 XXX XXX-XXXX</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-user-circle"></i>
+                    Perfil Profesional
+                </h2>
+                <p style="color: #666; line-height: 1.8; text-align: justify;">
+                    Profesional del área comercial con sólida orientación a resultados y capacidad para generar impacto positivo en equipos de trabajo. Destaco por mi habilidad para resolver desafíos de manera ágil, mantener comunicación efectiva con clientes y equipos, y adaptarme rápidamente a entornos dinámicos. Mi enfoque proactivo y determinación me permiten convertir ideas innovadoras en acciones concretas que impulsan el crecimiento del negocio.
+                </p>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-star"></i>
+                    Competencias Clave
+                </h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-name"><i class="fas fa-lightbulb"></i> Pensamiento Innovador</div>
+                        <div class="skill-desc">Generación de soluciones originales y estrategias disruptivas para optimizar procesos comerciales.</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name"><i class="fas fa-rocket"></i> Orientación a Resultados</div>
+                        <div class="skill-desc">Capacidad para ejecutar acciones con velocidad y precisión, cumpliendo objetivos en tiempos reducidos.</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name"><i class="fas fa-shield-alt"></i> Liderazgo Asertivo</div>
+                        <div class="skill-desc">Toma de decisiones firmes en situaciones de presión, inspirando confianza en el equipo.</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name"><i class="fas fa-comments"></i> Comunicación Estratégica</div>
+                        <div class="skill-desc">Habilidad para transmitir ideas de forma clara y persuasiva a diversos públicos.</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name"><i class="fas fa-sync-alt"></i> Flexibilidad</div>
+                        <div class="skill-desc">Ajuste efectivo a cambios del mercado y nuevas metodologías de trabajo.</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name"><i class="fas fa-chart-line"></i> Visión Comercial</div>
+                        <div class="skill-desc">Identificación de oportunidades de negocio y desarrollo de relaciones comerciales sostenibles.</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name"><i class="fas fa-handshake"></i> Negociación Efectiva</div>
+                        <div class="skill-desc">Cierre de acuerdos beneficiosos mediante estrategias de persuasión y empatía.</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-name"><i class="fas fa-users"></i> Trabajo en Equipo</div>
+                        <div class="skill-desc">Colaboración sinérgica con diferentes áreas para alcanzar metas organizacionales.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-briefcase"></i>
+                    Experiencia Profesional
+                </h2>
+                <div class="experience-item">
+                    <div class="exp-title">Ejecutivo Comercial Senior</div>
+                    <div class="exp-company">Empresa Líder del Sector</div>
+                    <div class="exp-period">2020 - Presente</div>
+                    <div class="exp-desc">
+                        Responsable de la gestión de cartera de clientes clave, desarrollo de estrategias de penetración de mercado y consecución de objetivos de ventas. Logré incrementar la facturación en un 35% mediante la implementación de planes comerciales innovadores.
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <div class="exp-title">Representante de Ventas</div>
+                    <div class="exp-company">Comercial Regional</div>
+                    <div class="exp-period">2017 - 2020</div>
+                    <div class="exp-desc">
+                        Gestión integral del ciclo de ventas, desde prospección hasta cierre. Construcción de relaciones duraderas con clientes y superación consistente de metas mensuales.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-graduation-cap"></i>
+                    Formación Académica
+                </h2>
+                <div class="experience-item">
+                    <div class="exp-title">Licenciatura en Administración / Comercialización</div>
+                    <div class="exp-company">Universidad Regional</div>
+                    <div class="exp-period">2013 - 2017</div>
+                </div>
+                <div class="experience-item">
+                    <div class="exp-title">Certificación en Estrategias de Ventas</div>
+                    <div class="exp-company">Instituto de Capacitación Profesional</div>
+                    <div class="exp-period">2019</div>
+                </div>
+            </div>
+            
+            <div class="buttons-container">
+                <a href="https://wa.me/5493764XXXXXX?text=Hola%20Milton,%20vi%20tu%20CV%20y%20me%20interesa%20contactarte" 
+                   class="btn btn-whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    Contactar por WhatsApp
+                </a>
+                <button onclick="downloadPDF()" class="btn btn-download">
+                    <i class="fas fa-download"></i>
+                    Descargar CV en PDF
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function downloadPDF() {
+            const buttons = document.querySelector('.buttons-container');
+            buttons.style.display = 'none';
+            
+            const element = document.getElementById('cv-content');
+            const opt = {
+                margin: 0,
+                filename: 'CV_Milton_Javier_Acosta.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            
+            html2pdf().set(opt).from(element).save().then(() => {
+                buttons.style.display = 'flex';
+            });
+        }
+
+        // Animación de entrada para las tarjetas
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        });
+
+        document.querySelectorAll('.skill-card, .experience-item').forEach((el) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
